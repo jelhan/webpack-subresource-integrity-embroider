@@ -1,0 +1,4 @@
+packages:
+  - "test-app"
+  - "tests"
+  - "webpack-subresource-integrity-embroider"

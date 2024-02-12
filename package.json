@@ -1,0 +1,15 @@
+{
+  "name": "webpack-subresource-integrity-embroider",
+  "scripts": {
+    "build": "pnpm --filter 'test-app' build",
+    "lint": "prettier --check .",
+    "lint:fix": "prettier --write .",
+    "test": "pnpm --filter 'tests' test"
+  },
+  "private": true,
+  "author": "Jeldrik Hanschke <github@jelhan.io>",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^3.2.4"
+  }
+}

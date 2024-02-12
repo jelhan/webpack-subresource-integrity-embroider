@@ -1,0 +1,19 @@
+{
+  "name": "webpack-subresource-integrity-embroider",
+  "version": "0.0.1",
+  "description": "Webpack plugin for enabling Subresource Integrity in Ember apps using Embroider",
+  "main": "index.js",
+  "scripts": {
+    "lint": "prettier --check .",
+    "lint:fix": "prettier --write .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jeldrik Hanschke <github@jelhan.io>",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^3.2.4"
+  },
+  "dependencies": {
+    "jsdom": "^24.0.0"
+  }
+}
