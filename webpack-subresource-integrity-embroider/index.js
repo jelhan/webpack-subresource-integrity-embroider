@@ -40,7 +40,7 @@ class SubresourceIntegrityPlugin {
               return;
             }
 
-            const fileHash = await createHash(hashAlgorithm)
+            const fileHash = createHash(hashAlgorithm)
               .update(await readFile(path.join(outputPath, fileName)))
               .digest("base64");
 
