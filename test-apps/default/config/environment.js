@@ -2,9 +2,9 @@
 
 module.exports = function (environment) {
   const ENV = {
-    modulePrefix: 'has-rooturl-set',
+    modulePrefix: 'test-app',
     environment,
-    rootURL: '/a-root-url/',
+    rootURL: '/',
     locationType: 'history',
     EmberENV: {
       EXTEND_PROTOTYPES: false,
