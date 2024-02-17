@@ -1,4 +1,4 @@
 packages:
-  - "test-app"
+  - "test-apps/*"
   - "tests"
   - "webpack-subresource-integrity-embroider"
