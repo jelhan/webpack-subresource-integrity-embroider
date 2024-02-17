@@ -1,15 +1,38 @@
 {
   "name": "webpack-subresource-integrity-embroider",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jelhan/webpack-subresource-integrity-embroider.git"
+  },
+  "license": "MIT",
+  "author": "Jeldrik Hanschke <github@jelhan.io>",
   "scripts": {
     "build": "pnpm --filter 'test-app' build",
     "lint": "prettier --check .",
     "lint:fix": "prettier --write .",
     "test": "pnpm --filter 'tests' test"
   },
-  "private": true,
-  "author": "Jeldrik Hanschke <github@jelhan.io>",
-  "license": "MIT",
   "devDependencies": {
-    "prettier": "^3.2.4"
+    "@release-it-plugins/lerna-changelog": "^5.0.0",
+    "prettier": "^3.2.4",
+    "release-it": "^15.5.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "release-it": {
+    "plugins": {
+      "@release-it-plugins/lerna-changelog": {
+        "infile": "CHANGELOG.md",
+        "launchEditor": true
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
+    }
   }
 }
