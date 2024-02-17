@@ -19,11 +19,12 @@ class SubresourceIntegrityPlugin {
           [...scriptElements, ...linkElements].map(async (element) => {
             // calculate integrity
             const hashAlgorithm = "sha384";
-            const assetLocation = element.tagName === "SCRIPT"
+            const assetLocation =
+              element.tagName === "SCRIPT"
                 ? element.getAttribute("src")
                 : element.getAttribute("href");
             // strip publishPath from locations
-            const fileName = assetLocation.replace(publicPath, '/');
+            const fileName = assetLocation.replace(publicPath, "/");
 
             if (fileName === "/ember-cli-live-reload.js") {
               // ember-cli-live-reload.js does not exist on disk
