@@ -30,7 +30,5 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: wyvox/action-setup-pnpm@v2
-      - name: Build test-app
-        run: pnpm build
       - name: Run Tests
         run: pnpm test
