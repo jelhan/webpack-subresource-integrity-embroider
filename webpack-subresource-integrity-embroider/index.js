@@ -8,36 +8,64 @@ class SubresourceIntegrityPlugin {
     compiler.hooks.done.tapPromise(
       "WriteSRIToIndexHtmlPlugin",
       async (stats) => {
-        const buildPath = stats.toJson().outputPath;
-        const indexHtmlPath = path.join(buildPath, "index.html");
+        const { outputPath, publicPath } = stats.toJson();
+        const indexHtmlPath = path.join(outputPath, "index.html");
         const indexHtmlContent = await readFile(indexHtmlPath, "utf-8");
         const indexHtml = new JSDOM(indexHtmlContent);
         const scriptElements =
           indexHtml.window.document.querySelectorAll("script");
         const linkElements = indexHtml.window.document.querySelectorAll("link");
+        const fileErrors = [];
         await Promise.all(
           [...scriptElements, ...linkElements].map(async (element) => {
             // calculate integrity
-            const hashAlgorith = "sha384";
-            const fileName =
+            const hashAlgorithm = "sha384";
+            const assetLocation =
               element.tagName === "SCRIPT"
                 ? element.getAttribute("src")
                 : element.getAttribute("href");
+            // strip publishPath from locations
+            const fileName = assetLocation.replace(publicPath, "/");
 
             if (fileName === "/ember-cli-live-reload.js") {
               // ember-cli-live-reload.js does not exist on disk
               return;
             }
 
-            const fileHash = createHash(hashAlgorith)
-              .update(await readFile(path.join(buildPath, fileName)))
+            if (fileName.startsWith("http")) {
+              if (element.getAttribute("integrity")) return;
+
+              fileErrors.push(element);
+
+              return;
+            }
+
+            const fileHash = await createHash(hashAlgorithm)
+              .update(await readFile(path.join(outputPath, fileName)))
               .digest("base64");
+
             // set integrity attribute
-            element.setAttribute("integrity", `${hashAlgorith}-${fileHash}`);
+            element.setAttribute("integrity", `${hashAlgorithm}-${fileHash}`);
             // set crossorigin attribute
             element.setAttribute("crossorigin", "anonymous");
           }),
         );
+
+        if (fileErrors.length > 0) {
+          let errorMessages = `🚨🚨 The following external resources do not have an integrity hash:\n`;
+
+          for (const element of fileErrors) {
+            errorMessages += `\n${element.outerHTML}`;
+          }
+
+          errorMessages +=
+            "\n\nYou should generate an integrity hash for these files and apply it to the <script> or <link> tag in your index.html file.";
+          errorMessages +=
+            "\n\nLearn more about generating an integrity hash here:\nhttps://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity#tools_for_generating_sri_hashes";
+
+          throw new Error(errorMessages);
+        }
+
         await writeFile(indexHtmlPath, indexHtml.serialize());
       },
     );
