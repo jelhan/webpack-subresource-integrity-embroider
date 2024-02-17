@@ -18,7 +18,7 @@ importers:
         specifier: ^15.5.0
         version: 15.11.0
 
-  test-app:
+  test-apps/default:
     devDependencies:
       '@babel/core':
         specifier: ^7.23.6
@@ -160,7 +160,7 @@ importers:
         version: 5.90.0
       webpack-subresource-integrity-embroider:
         specifier: 'workspace: *'
-        version: link:../webpack-subresource-integrity-embroider
+        version: link:../../webpack-subresource-integrity-embroider
 
   tests:
     dependencies:
@@ -253,7 +253,7 @@ packages:
     resolution: {integrity: sha512-lN85QRR+5IbYrMWM6Y4pE/noaQtg4pNiqeNGX60eqOfo6gtEj6uw/JagelB8vVztSd7R6M5n1+PQkDbHbBRU4g==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      '@babel/types': 7.23.0
+      '@babel/types': 7.23.9
       '@jridgewell/gen-mapping': 0.3.3
       '@jridgewell/trace-mapping': 0.3.22
       jsesc: 2.5.2
@@ -1501,13 +1501,13 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/code-frame': 7.23.5
-      '@babel/generator': 7.23.0
+      '@babel/generator': 7.23.6
       '@babel/helper-environment-visitor': 7.22.20
       '@babel/helper-function-name': 7.23.0
       '@babel/helper-hoist-variables': 7.22.5
       '@babel/helper-split-export-declaration': 7.22.6
       '@babel/parser': 7.23.9
-      '@babel/types': 7.23.0
+      '@babel/types': 7.23.9
       debug: 4.3.4(supports-color@8.1.1)
       globals: 11.12.0
     transitivePeerDependencies:
@@ -5876,7 +5876,7 @@ packages:
       supports-color:
         optional: true
     dependencies:
-      ms: 2.1.2
+      ms: 2.1.3
     dev: true
 
   /debug@4.3.4(supports-color@8.1.1):
