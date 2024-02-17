@@ -8,9 +8,7 @@ class SubresourceIntegrityPlugin {
     compiler.hooks.done.tapPromise(
       "WriteSRIToIndexHtmlPlugin",
       async (stats) => {
-        const statsJson = stats.toJson();
-        const buildPath = statsJson.outputPath;
-        const publicPath = statsJson.publicPath;
+        const { buildPath, publicPath } = stats.toJson();
         const indexHtmlPath = path.join(buildPath, "index.html");
         const indexHtmlContent = await readFile(indexHtmlPath, "utf-8");
         const indexHtml = new JSDOM(indexHtmlContent);
@@ -20,7 +18,7 @@ class SubresourceIntegrityPlugin {
         await Promise.all(
           [...scriptElements, ...linkElements].map(async (element) => {
             // calculate integrity
-            const hashAlgorith = "sha384";
+            const hashAlgorithm = "sha384";
             const assetLocation = element.tagName === "SCRIPT"
                 ? element.getAttribute("src")
                 : element.getAttribute("href");
@@ -33,12 +31,12 @@ class SubresourceIntegrityPlugin {
               return;
             }
 
-            const fileHash = createHash(hashAlgorith)
+            const fileHash = createHash(hashAlgorithm)
               .update(await readFile(path.join(buildPath, fileName)))
               .digest("base64");
 
             // set integrity attribute
-            element.setAttribute("integrity", `${hashAlgorith}-${fileHash}`);
+            element.setAttribute("integrity", `${hashAlgorithm}-${fileHash}`);
             // set crossorigin attribute
             element.setAttribute("crossorigin", "anonymous");
           }),
