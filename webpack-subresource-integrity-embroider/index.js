@@ -8,8 +8,8 @@ class SubresourceIntegrityPlugin {
     compiler.hooks.done.tapPromise(
       "WriteSRIToIndexHtmlPlugin",
       async (stats) => {
-        const buildPath = stats.toJson().outputPath;
-        const indexHtmlPath = path.join(buildPath, "index.html");
+        const { outputPath, publicPath } = stats.toJson();
+        const indexHtmlPath = path.join(outputPath, "index.html");
         const indexHtmlContent = await readFile(indexHtmlPath, "utf-8");
         const indexHtml = new JSDOM(indexHtmlContent);
         const scriptElements =
@@ -18,22 +18,25 @@ class SubresourceIntegrityPlugin {
         await Promise.all(
           [...scriptElements, ...linkElements].map(async (element) => {
             // calculate integrity
-            const hashAlgorith = "sha384";
-            const fileName =
+            const hashAlgorithm = "sha384";
+            const assetLocation =
               element.tagName === "SCRIPT"
                 ? element.getAttribute("src")
                 : element.getAttribute("href");
+            // strip publishPath from locations
+            const fileName = assetLocation.replace(publicPath, "/");
 
             if (fileName === "/ember-cli-live-reload.js") {
               // ember-cli-live-reload.js does not exist on disk
               return;
             }
 
-            const fileHash = createHash(hashAlgorith)
-              .update(await readFile(path.join(buildPath, fileName)))
+            const fileHash = createHash(hashAlgorithm)
+              .update(await readFile(path.join(outputPath, fileName)))
               .digest("base64");
+
             // set integrity attribute
-            element.setAttribute("integrity", `${hashAlgorith}-${fileHash}`);
+            element.setAttribute("integrity", `${hashAlgorithm}-${fileHash}`);
             // set crossorigin attribute
             element.setAttribute("crossorigin", "anonymous");
           }),
