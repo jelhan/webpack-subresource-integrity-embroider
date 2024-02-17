@@ -1,6 +1,6 @@
 {
   "name": "webpack-subresource-integrity-embroider",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Webpack plugin for enabling Subresource Integrity in Ember apps using Embroider",
   "main": "index.js",
   "scripts": {
@@ -10,10 +10,32 @@
   },
   "author": "Jeldrik Hanschke <github@jelhan.io>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jelhan/webpack-subresource-integrity-embroider.git"
+  },
   "devDependencies": {
     "prettier": "^3.2.4"
   },
   "dependencies": {
     "jsdom": "^24.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "release-it": {
+    "plugins": {
+      "@release-it-plugins/lerna-changelog": {
+        "infile": "CHANGELOG.md",
+        "launchEditor": true
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
+    }
   }
 }
