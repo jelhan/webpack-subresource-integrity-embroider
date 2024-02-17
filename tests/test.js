@@ -21,16 +21,10 @@ describe("Embroider build", function () {
 
   for (const scenario of scenarios) {
     describe(`Scenario: ${scenario}`, function () {
-      before(async function () {
-        this.timeout(60000);
+      before(function () {
         try {
-          const appPath = path.join("..", "test-apps", scenario);
-          await execa("pnpm", ["build"], {
-            cwd: appPath,
-          });
-
           const indexHtmlContent = readFileSync(
-            path.join(appPath, "dist", "index.html"),
+            path.join("..", "test-apps", scenario, "dist", "index.html"),
             {
               encoding: "utf8",
             },
