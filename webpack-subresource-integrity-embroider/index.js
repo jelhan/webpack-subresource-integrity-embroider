@@ -8,8 +8,8 @@ class SubresourceIntegrityPlugin {
     compiler.hooks.done.tapPromise(
       "WriteSRIToIndexHtmlPlugin",
       async (stats) => {
-        const { buildPath, publicPath } = stats.toJson();
-        const indexHtmlPath = path.join(buildPath, "index.html");
+        const { outputPath, publicPath } = stats.toJson();
+        const indexHtmlPath = path.join(outputPath, "index.html");
         const indexHtmlContent = await readFile(indexHtmlPath, "utf-8");
         const indexHtml = new JSDOM(indexHtmlContent);
         const scriptElements =
@@ -31,7 +31,7 @@ class SubresourceIntegrityPlugin {
             }
 
             const fileHash = createHash(hashAlgorithm)
-              .update(await readFile(path.join(buildPath, fileName)))
+              .update(await readFile(path.join(outputPath, fileName)))
               .digest("base64");
 
             // set integrity attribute
