@@ -1,23 +1,26 @@
 import { expect } from "chai";
 import { readdirSync, readFileSync } from "node:fs";
-import path from 'node:path';
+import path from "node:path";
 import { JSDOM } from "jsdom";
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from "url";
 
-const __dirname = fileURLToPath(new URL('.', import.meta.url));
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 describe("Embroider build", function () {
   let indexHtml;
 
-  const scenarios = readdirSync(path.join(__dirname, '..', 'test-apps'));
+  const scenarios = readdirSync(path.join(__dirname, "..", "test-apps"));
 
   for (const scneario of scenarios) {
-    describe(`Scenario: ${scneario}`, function() {
+    describe(`Scenario: ${scneario}`, function () {
       before(function () {
         try {
-          const indexHtmlContent = readFileSync(path.join('..', 'test-apps', scneario, 'dist', 'index.html'), {
-            encoding: "utf8",
-          });
+          const indexHtmlContent = readFileSync(
+            path.join("..", "test-apps", scneario, "dist", "index.html"),
+            {
+              encoding: "utf8",
+            },
+          );
           indexHtml = new JSDOM(indexHtmlContent).window.document;
         } catch (error) {
           throw new Error(
