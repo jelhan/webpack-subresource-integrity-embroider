@@ -8,7 +8,7 @@
     "url": "git@github.com:jelhan/webpack-subresource-integrity-embroider.git"
   },
   "scripts": {
-    "build": "pnpm --filter 'test-app' build",
+    "build": "pnpm --filter '@test-apps/*' build",
     "lint": "prettier --check .",
     "lint:fix": "prettier --write .",
     "release": "pnpm --filter 'webpack-subresource-integrity-embroider' exec release-it",

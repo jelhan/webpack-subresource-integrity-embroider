@@ -1,5 +1,5 @@
 {
-  "name": "test-app",
+  "name": "@test-apps/default",
   "version": "0.0.0",
   "private": true,
   "description": "Small description for test-app goes here",
