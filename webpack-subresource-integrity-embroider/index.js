@@ -25,9 +25,8 @@ class SubresourceIntegrityPlugin {
             // strip publishPath from locations
             const fileName = assetLocation.replace(publicPath, '/');
 
-            if (fileName.startsWith("http") || fileName === "/ember-cli-live-reload.js") {
+            if (fileName === "/ember-cli-live-reload.js") {
               // ember-cli-live-reload.js does not exist on disk
-              // skip external resources
               return;
             }
 
