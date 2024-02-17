@@ -1,5 +1,5 @@
 {
-  "name": "@test-apps/default",
+  "name": "@test-apps/external-resource-with-integrity-hash",
   "version": "0.0.0",
   "private": true,
   "description": "Small description for test-app goes here",
