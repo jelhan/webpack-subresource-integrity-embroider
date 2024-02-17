@@ -3,11 +3,15 @@
   "license": "MIT",
   "author": "Jeldrik Hanschke <github@jelhan.io>",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jelhan/webpack-subresource-integrity-embroider.git"
+  },
   "scripts": {
     "build": "pnpm --filter 'test-app' build",
     "lint": "prettier --check .",
     "lint:fix": "prettier --write .",
-    "release": "pnpm exec --filter 'webpack-subresource-integrity-embroider' release-it",
+    "release": "pnpm --filter 'webpack-subresource-integrity-embroider' exec release-it",
     "test": "pnpm --filter 'tests' test"
   },
   "devDependencies": {
