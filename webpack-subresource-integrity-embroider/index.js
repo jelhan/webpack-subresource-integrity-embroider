@@ -31,7 +31,7 @@ class SubresourceIntegrityPlugin {
 
             const fileHash = createHash(hashAlgorith)
               .update(await readFile(path.join(buildPath, fileName)))
-              .digest("hex");
+              .digest("base64");
             // set integrity attribute
             element.setAttribute("integrity", `${hashAlgorith}-${fileHash}`);
             // set crossorigin attribute
