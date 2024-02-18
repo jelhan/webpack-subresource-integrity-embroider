@@ -5,6 +5,7 @@ import { fileURLToPath } from "url";
 import { execa } from "execa";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
+
 export async function getIndexHtml(scenario) {
   try {
     const indexHtmlContent = readFileSync(
@@ -21,6 +22,7 @@ export async function getIndexHtml(scenario) {
     );
   }
 }
+
 export async function buildApp(scenario) {
   try {
     return await execa("pnpm", ["build"], {
@@ -33,13 +35,17 @@ export async function buildApp(scenario) {
     );
   }
 }
+
 export const scenarios = readdirSync(
   path.join(__dirname, "..", "test-apps"),
 ).filter((file) => {
   // skip this app as it's intended to fail the build
   return file !== "external-resource-missing-integrity-hash";
 });
+
+// Build the apps
 console.log("Building scenarios:");
+
 await Promise.all(
   scenarios.map((scenario) =>
     (async () => {
