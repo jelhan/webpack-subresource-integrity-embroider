@@ -32,7 +32,7 @@ class SubresourceIntegrityPlugin {
               return;
             }
 
-            if (fileName.startsWith("http")) {
+            if (fileName.startsWith("http") || fileName.startsWith("//")) {
               if (element.getAttribute("integrity")) return;
 
               fileErrors.push(element);
