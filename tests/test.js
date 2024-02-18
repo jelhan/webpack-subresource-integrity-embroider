@@ -74,31 +74,27 @@ describe("External resource handling", function () {
     let indexHtml;
 
     before(async function () {
-      indexHtml = indexHtml = await getIndexHtml(
-        "external-resource-with-integrity-hash",
-      );
+      indexHtml = await getIndexHtml("external-resource-with-integrity-hash");
     });
 
     it("Leaves existing crossorigin attribute as is", function () {
-      for (const el of indexHtml.querySelectorAll(
+      const el = indexHtml.querySelector(
         "script[src='https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js']",
-      )) {
-        expect(el.hasAttribute("crossorigin")).to.be.true;
-        expect(el.getAttribute("crossorigin")).to.be.a("string");
-        expect(el.getAttribute("crossorigin")).to.equal("anonymous");
-      }
+      );
+      expect(el.hasAttribute("crossorigin")).to.be.true;
+      expect(el.getAttribute("crossorigin")).to.be.a("string");
+      expect(el.getAttribute("crossorigin")).to.equal("anonymous");
     });
 
     it("Leaves existing integrity as is", function () {
-      for (const el of indexHtml.querySelectorAll(
+      const el = indexHtml.querySelector(
         "script[src='https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js']",
-      )) {
-        expect(el.hasAttribute("integrity")).to.be.true;
-        expect(el.getAttribute("integrity")).to.be.a("string");
-        expect(el.getAttribute("integrity")).to.equal(
-          "sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs",
-        );
-      }
+      );
+      expect(el.hasAttribute("integrity")).to.be.true;
+      expect(el.getAttribute("integrity")).to.be.a("string");
+      expect(el.getAttribute("integrity")).to.equal(
+        "sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs",
+      );
     });
   });
 });
