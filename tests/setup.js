@@ -5,7 +5,7 @@ import { fileURLToPath } from "url";
 import { execa } from "execa";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
-export async function readFile(scenario) {
+export async function getIndexHtml(scenario) {
   try {
     const indexHtmlContent = readFileSync(
       path.join("..", "test-apps", scenario, "dist", "index.html"),

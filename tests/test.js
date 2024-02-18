@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { scenarios, readFile, buildApp } from "./setup.js";
+import { scenarios, getIndexHtml, buildApp } from "./setup.js";
 
 describe("Embroider build", function () {
   let indexHtml;
@@ -7,7 +7,7 @@ describe("Embroider build", function () {
   for (const scenario of scenarios) {
     describe(`Scenario: ${scenario}`, function () {
       before(async function () {
-        indexHtml = await readFile(scenario);
+        indexHtml = await getIndexHtml(scenario);
       });
 
       it("adds integrity attribute to link elements for stylesheets", function () {
@@ -74,7 +74,7 @@ describe("External resource handling", function () {
     let indexHtml;
 
     before(async function () {
-      indexHtml = indexHtml = await readFile(
+      indexHtml = indexHtml = await getIndexHtml(
         "external-resource-with-integrity-hash",
       );
     });
