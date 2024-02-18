@@ -26,14 +26,14 @@ class SubresourceIntegrityPlugin {
                 : element.getAttribute("href");
             // strip publishPath from locations
             const fileName = assetLocation.replace(publicPath, "/");
-
+            const currentIntegrity = element.getAttribute("integrity");
             if (fileName === "/ember-cli-live-reload.js") {
               // ember-cli-live-reload.js does not exist on disk
               return;
             }
 
             if (fileName.startsWith("http") || fileName.startsWith("//")) {
-              if (element.getAttribute("integrity")) return;
+              if (currentIntegrity && currentIntegrity.trim() !== "") return;
 
               fileErrors.push(element);
 

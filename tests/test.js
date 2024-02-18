@@ -7,27 +7,48 @@ import { execa } from "execa";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
+const testApps = readdirSync(path.join(__dirname, "..", "test-apps"));
+
+async function buildApp(scenario) {
+  try {
+    return await execa("pnpm", ["build"], {
+      cwd: path.join(__dirname, "..", "test-apps", scenario),
+    });
+  } catch (error) {
+    throw new Error(
+      "Building the test app failed. Please test manually running `pnpm build` for that test app",
+      { cause: error },
+    );
+  }
+}
+
+const scenarios = testApps.filter((file) => {
+  // skip this app as it's intended to fail the build
+  return file !== "external-resource-missing-integrity-hash";
+});
+
+console.log("Building scenarios:");
+await Promise.all(
+  scenarios.map((scenario) =>
+    (async () => {
+      try {
+        await buildApp(scenario);
+        console.log(`✅ Built ${scenario}`);
+      } catch (error) {
+        console.error(`❌ Failed to build ${scenario}`);
+        throw error;
+      }
+    })(),
+  ),
+);
+
 describe("Embroider build", function () {
   let indexHtml;
-
-  const scenarios = readdirSync(path.join(__dirname, "..", "test-apps")).filter(
-    (file) =>
-      [
-        // skip these test apps
-        "external-resource-missing-integrity-hash",
-        "external-resource-with-integrity-hash",
-      ].includes(file) === false,
-  );
 
   for (const scenario of scenarios) {
     describe(`Scenario: ${scenario}`, function () {
       before(async function () {
-        this.timeout(60000);
         try {
-          await execa("pnpm", ["build"], {
-            cwd: path.join(__dirname, "..", "test-apps", scenario),
-          });
-
           const indexHtmlContent = readFileSync(
             path.join("..", "test-apps", scenario, "dist", "index.html"),
             {
@@ -76,56 +97,71 @@ describe("Embroider build", function () {
   }
 });
 
-describe("Build error on missing integrity hash for external resources", function () {
-  let buildOutput;
-
-  beforeEach(async function () {
+describe("External resource handling", function () {
+  it("Build throws an error if integrity hash is missing", async function () {
     this.timeout(60000);
     try {
-      await execa("pnpm", ["build"], {
-        cwd: path.join(
-          __dirname,
-          "..",
-          "test-apps",
-          "external-resource-missing-integrity-hash",
-        ),
-      });
+      await buildApp("external-resource-missing-integrity-hash");
+      expect(false, "Build should have failed").to.be.ok;
     } catch (error) {
-      buildOutput = error.message;
+      expect(error.cause.message).to.include(
+        '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>',
+      );
     }
   });
 
-  it("Throws an error if integrity hash is missing", function () {
-    expect(buildOutput).to.include(
-      "🚨🚨 The following external resources do not have an integrity hash:\n" +
-        '\n<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>\n',
-    );
-  });
-});
-
-describe("No build error when integrity hash present for external resources", function () {
-  let buildOutput;
-
-  beforeEach(async function () {
+  it("Build does not throw an error if integrity hash is present", async function () {
     this.timeout(60000);
-    try {
-      const output = await execa("pnpm", ["build"], {
-        cwd: path.join(
-          __dirname,
-          "..",
-          "test-apps",
-          "external-resource-with-integrity-hash",
-        ),
-      });
-      buildOutput = output.stdout;
-    } catch (error) {
-      buildOutput = error.message;
-    }
+    const buildOutput = await buildApp("external-resource-with-integrity-hash");
+    expect(buildOutput.exitCode).to.equal(0);
   });
 
-  it("Does not throw an error if integrity hash is present", function () {
-    expect(buildOutput).to.not.include(
-      "🚨🚨 The following external resources do not have an integrity hash:\n",
-    );
+  describe("Existing integrity and origin", function () {
+    let indexHtml;
+
+    before(async function () {
+      try {
+        const indexHtmlContent = readFileSync(
+          path.join(
+            "..",
+            "test-apps",
+            "external-resource-with-integrity-hash",
+            "dist",
+            "index.html",
+          ),
+          {
+            encoding: "utf8",
+          },
+        );
+        indexHtml = new JSDOM(indexHtmlContent).window.document;
+      } catch (error) {
+        throw new Error(
+          "Parsing index.html of test-app build failed. Double check that test-app has been built successfully.",
+          { cause: error },
+        );
+      }
+    });
+
+    it("Leaves existing crossorigin attribute as is", function () {
+      for (const el of indexHtml.querySelectorAll(
+        "script[src='https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js']",
+      )) {
+        expect(el.hasAttribute("crossorigin")).to.be.true;
+        expect(el.getAttribute("crossorigin")).to.be.a("string");
+        expect(el.getAttribute("crossorigin")).to.equal("anonymous");
+      }
+    });
+
+    it("Leaves existing integrity as is", function () {
+      for (const el of indexHtml.querySelectorAll(
+        "script[src='https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js']",
+      )) {
+        expect(el.hasAttribute("integrity")).to.be.true;
+        expect(el.getAttribute("integrity")).to.be.a("string");
+        expect(el.getAttribute("integrity")).to.equal(
+          "sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs",
+        );
+      }
+    });
   });
 });
