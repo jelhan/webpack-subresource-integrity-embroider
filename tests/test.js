@@ -1,33 +1,13 @@
 import { expect } from "chai";
-import { readdirSync, readFileSync } from "node:fs";
-import path from "node:path";
-import { JSDOM } from "jsdom";
-import { fileURLToPath } from "url";
-
-const __dirname = fileURLToPath(new URL(".", import.meta.url));
+import { scenarios, getIndexHtml, buildApp } from "./setup.js";
 
 describe("Embroider build", function () {
   let indexHtml;
 
-  const scenarios = readdirSync(path.join(__dirname, "..", "test-apps"));
-
-  for (const scneario of scenarios) {
-    describe(`Scenario: ${scneario}`, function () {
-      before(function () {
-        try {
-          const indexHtmlContent = readFileSync(
-            path.join("..", "test-apps", scneario, "dist", "index.html"),
-            {
-              encoding: "utf8",
-            },
-          );
-          indexHtml = new JSDOM(indexHtmlContent).window.document;
-        } catch (error) {
-          throw new Error(
-            "Parsing index.html of test-app build failed. Double check that test-app has been build successfuly.",
-            { cause: error },
-          );
-        }
+  for (const scenario of scenarios) {
+    describe(`Scenario: ${scenario}`, function () {
+      before(async function () {
+        indexHtml = await getIndexHtml(scenario);
       });
 
       it("adds integrity attribute to link elements for stylesheets", function () {
@@ -61,4 +41,60 @@ describe("Embroider build", function () {
       });
     });
   }
+});
+
+describe("External resource handling", function () {
+  it("Build throws an error if integrity hash is missing", async function () {
+    this.timeout(60000);
+    try {
+      await buildApp("external-resource-missing-integrity-hash");
+      expect(false, "Build should have failed").to.be.ok;
+    } catch (error) {
+      expect(error.cause.message).to.include(
+        '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>',
+      );
+
+      expect(error.cause.message).to.include(
+        '<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>',
+      );
+
+      expect(error.cause.message).to.include(
+        '<script src="//ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>',
+      );
+    }
+  });
+
+  it("Build does not throw an error if integrity hash is present", async function () {
+    this.timeout(60000);
+    const buildOutput = await buildApp("external-resource-with-integrity-hash");
+    expect(buildOutput.exitCode).to.equal(0);
+  });
+
+  describe("Existing integrity and origin", function () {
+    let indexHtml;
+
+    before(async function () {
+      indexHtml = await getIndexHtml("external-resource-with-integrity-hash");
+    });
+
+    it("Leaves existing crossorigin attribute as is", function () {
+      const el = indexHtml.querySelector(
+        "script[src='https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js']",
+      );
+      expect(el.hasAttribute("crossorigin")).to.be.true;
+      expect(el.getAttribute("crossorigin")).to.be.a("string");
+      expect(el.getAttribute("crossorigin")).to.equal("anonymous");
+    });
+
+    it("Leaves existing integrity as is", function () {
+      const el = indexHtml.querySelector(
+        "script[src='https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js']",
+      );
+      expect(el.hasAttribute("integrity")).to.be.true;
+      expect(el.getAttribute("integrity")).to.be.a("string");
+      expect(el.getAttribute("integrity")).to.equal(
+        "sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs",
+      );
+    });
+  });
 });
