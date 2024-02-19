@@ -1,36 +1,50 @@
 <!doctype html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <title>TestApp</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<head>
-  <meta charset="utf-8" />
-  <title>TestApp</title>
-  <meta name="description" content="" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {{content-for "head"}}
 
-  {{content-for "head"}}
+    <link integrity="" rel="stylesheet" href="{{rootURL}}assets/vendor.css" />
+    <link
+      integrity=""
+      rel="stylesheet"
+      href="{{rootURL}}assets/@test-apps/rooturl-and-publicpath-differ.css"
+    />
 
-  <link integrity="" rel="stylesheet" href="{{rootURL}}assets/vendor.css" />
-  <link integrity="" rel="stylesheet" href="{{rootURL}}assets/@test-apps/rooturl-and-publicpath-differ.css" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="{{rootURL}}apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="{{rootURL}}favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="{{rootURL}}favicon-16x16.png"
+    />
+    <link rel="manifest" href="{{rootURL}}site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
 
+    {{content-for "head-footer"}}
+  </head>
 
-  <link rel="apple-touch-icon" sizes="180x180" href="{{rootURL}}apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="{{rootURL}}favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="{{rootURL}}favicon-16x16.png">
-  <link rel="manifest" href="{{rootURL}}site.webmanifest">
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="theme-color" content="#ffffff">
+  <body>
+    {{content-for "body"}}
 
+    <script src="{{rootURL}}assets/vendor.js"></script>
+    <script src="{{rootURL}}assets/@test-apps/rooturl-and-publicpath-differ.js"></script>
 
-  {{content-for "head-footer"}}
-</head>
-
-<body>
-  {{content-for "body"}}
-
-  <script src="{{rootURL}}assets/vendor.js"></script>
-  <script src="{{rootURL}}assets/@test-apps/rooturl-and-publicpath-differ.js"></script>
-
-  {{content-for "body-footer"}}
-</body>
-
+    {{content-for "body-footer"}}
+  </body>
 </html>
