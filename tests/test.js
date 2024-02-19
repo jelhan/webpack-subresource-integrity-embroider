@@ -11,7 +11,7 @@ describe("Embroider build", function () {
       });
 
       it("adds integrity attribute to link elements for stylesheets", function () {
-        for (const el of indexHtml.querySelectorAll("link")) {
+        for (const el of indexHtml.querySelectorAll("link[rel=stylesheet]")) {
           expect(el.hasAttribute("integrity")).to.be.true;
           expect(el.getAttribute("integrity")).to.be.a("string");
         }
@@ -25,7 +25,7 @@ describe("Embroider build", function () {
       });
 
       it("adds crossorigin attribute to link elements for stylesheets", function () {
-        for (const el of indexHtml.querySelectorAll("script")) {
+        for (const el of indexHtml.querySelectorAll("link[rel=stylesheet]")) {
           expect(el.hasAttribute("crossorigin")).to.be.true;
           expect(el.getAttribute("crossorigin")).to.be.a("string");
           expect(el.getAttribute("crossorigin")).to.equal("anonymous");
@@ -41,6 +41,44 @@ describe("Embroider build", function () {
       });
     });
   }
+});
+
+describe("When rootURL and publicPath do not match", function () {
+  let indexHtml, manifest, favicons;
+
+  before(async function () {
+    indexHtml = await getIndexHtml("rooturl-and-publicpath-differ");
+    favicons = indexHtml.querySelectorAll(
+      'link[rel="icon"], link[rel="apple-touch-icon"]',
+    );
+    manifest = indexHtml.querySelector('link[rel="manifest"]');
+  });
+
+  it("Favicons have integrity hash", async function () {
+    for (const favicon of favicons) {
+      expect(favicon.hasAttribute("integrity")).to.be.true;
+      expect(favicon.getAttribute("integrity")).to.be.a("string");
+    }
+  });
+
+  it("Favicons have crossorigin attribute", async function () {
+    for (const favicon of favicons) {
+      expect(favicon.hasAttribute("crossorigin")).to.be.true;
+      expect(favicon.getAttribute("crossorigin")).to.be.a("string");
+      expect(favicon.getAttribute("crossorigin")).to.equal("anonymous");
+    }
+  });
+
+  it("Manifest has integrity hash", async function () {
+    expect(manifest.hasAttribute("integrity")).to.be.true;
+    expect(manifest.getAttribute("integrity")).to.be.a("string");
+  });
+
+  it("Manifest has crossorigin attribute", async function () {
+    expect(manifest.hasAttribute("crossorigin")).to.be.true;
+    expect(manifest.getAttribute("crossorigin")).to.be.a("string");
+    expect(manifest.getAttribute("crossorigin")).to.equal("anonymous");
+  });
 });
 
 describe("External resource handling", function () {

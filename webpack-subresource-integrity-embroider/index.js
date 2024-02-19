@@ -12,6 +12,15 @@ class SubresourceIntegrityPlugin {
         const indexHtmlPath = path.join(outputPath, "index.html");
         const indexHtmlContent = await readFile(indexHtmlPath, "utf-8");
         const indexHtml = new JSDOM(indexHtmlContent);
+        const environmentMeta = indexHtml.window.document.querySelector(
+          'meta[name$="/config/environment"]',
+        );
+        const { rootURL } = JSON.parse(
+          indexHtml.window.unescape(environmentMeta.getAttribute("content")),
+        );
+        const rootURLOrPublicPathRegex = new RegExp(
+          `^(${rootURL}|${publicPath})`,
+        );
         const scriptElements =
           indexHtml.window.document.querySelectorAll("script");
         const linkElements = indexHtml.window.document.querySelectorAll("link");
@@ -25,7 +34,10 @@ class SubresourceIntegrityPlugin {
                 ? element.getAttribute("src")
                 : element.getAttribute("href");
             // strip publishPath from locations
-            const fileName = assetLocation.replace(publicPath, "/");
+            const fileName = assetLocation.replace(
+              rootURLOrPublicPathRegex,
+              "/",
+            );
             const currentIntegrity = element.getAttribute("integrity");
             if (fileName === "/ember-cli-live-reload.js") {
               // ember-cli-live-reload.js does not exist on disk
