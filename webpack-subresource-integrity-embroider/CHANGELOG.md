@@ -1,5 +1,14 @@
 
 
+
+## v0.2.1 (2024-02-20)
+
+#### :bug: Bug Fix
+* [#12](https://github.com/jelhan/webpack-subresource-integrity-embroider/pull/12) Support assets not correctly prefixed by Embrodier with publicPath ([@evoactivity](https://github.com/evoactivity))
+
+#### Committers: 1
+- Liam Potter ([@evoactivity](https://github.com/evoactivity))
+
 ## v0.2.0 (2024-02-19)
 
 #### :rocket: Enhancement
