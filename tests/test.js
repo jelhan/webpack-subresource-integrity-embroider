@@ -4,6 +4,10 @@ import { scenarios, getIndexHtml, buildApp } from "./setup.js";
 describe("Embroider build", function () {
   let indexHtml;
 
+  function isInlineScript(el) {
+    return !el.hasAttribute("src");
+  }
+
   for (const scenario of scenarios) {
     describe(`Scenario: ${scenario}`, function () {
       before(async function () {
@@ -19,8 +23,12 @@ describe("Embroider build", function () {
 
       it("adds integrity attribute to script elements", function () {
         for (const el of indexHtml.querySelectorAll("script")) {
-          expect(el.hasAttribute("integrity")).to.be.true;
-          expect(el.getAttribute("integrity")).to.be.a("string");
+          if (isInlineScript(el)) {
+            expect(el.hasAttribute("integrity")).to.be.false;
+          } else {
+            expect(el.hasAttribute("integrity")).to.be.true;
+            expect(el.getAttribute("integrity")).to.be.a("string");
+          }
         }
       });
 
@@ -34,9 +42,13 @@ describe("Embroider build", function () {
 
       it("adds crossorigin attribute to script elements", function () {
         for (const el of indexHtml.querySelectorAll("script")) {
-          expect(el.hasAttribute("crossorigin")).to.be.true;
-          expect(el.getAttribute("crossorigin")).to.be.a("string");
-          expect(el.getAttribute("crossorigin")).to.equal("anonymous");
+          if (isInlineScript(el)) {
+            expect(el.hasAttribute("crossorigin")).to.be.false;
+          } else {
+            expect(el.hasAttribute("crossorigin")).to.be.true;
+            expect(el.getAttribute("crossorigin")).to.be.a("string");
+            expect(el.getAttribute("crossorigin")).to.equal("anonymous");
+          }
         }
       });
     });
