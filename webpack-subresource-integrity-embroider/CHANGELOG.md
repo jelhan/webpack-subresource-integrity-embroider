@@ -1,6 +1,15 @@
 
 
 
+
+## v0.2.2 (2024-04-16)
+
+#### :bug: Bug Fix
+* [#13](https://github.com/jelhan/webpack-subresource-integrity-embroider/pull/13) do not fail on inline scripts ([@enspandi](https://github.com/enspandi))
+
+#### Committers: 1
+- Andreas Minnich ([@enspandi](https://github.com/enspandi))
+
 ## v0.2.1 (2024-02-20)
 
 #### :bug: Bug Fix
