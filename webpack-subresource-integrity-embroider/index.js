@@ -33,6 +33,12 @@ class SubresourceIntegrityPlugin {
               element.tagName === "SCRIPT"
                 ? element.getAttribute("src")
                 : element.getAttribute("href");
+
+            if (!assetLocation) {
+              // skip inline scripts
+              return;
+            }
+
             // strip rootURL or publishPath from locations
             const fileName = assetLocation.replace(
               rootURLOrPublicPathRegex,
