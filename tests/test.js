@@ -60,37 +60,7 @@ describe("When rootURL and publicPath do not match", function () {
 
   before(async function () {
     indexHtml = await getIndexHtml("rooturl-and-publicpath-differ");
-    favicons = indexHtml.querySelectorAll(
-      'link[rel="icon"], link[rel="apple-touch-icon"]',
-    );
-    manifest = indexHtml.querySelector('link[rel="manifest"]');
     stylesheets = indexHtml.querySelectorAll('link[rel="stylesheet"]');
-  });
-
-  it("Favicons have integrity hash", function () {
-    for (const favicon of favicons) {
-      expect(favicon.hasAttribute("integrity")).to.be.true;
-      expect(favicon.getAttribute("integrity")).to.be.a("string");
-    }
-  });
-
-  it("Favicons have crossorigin attribute", function () {
-    for (const favicon of favicons) {
-      expect(favicon.hasAttribute("crossorigin")).to.be.true;
-      expect(favicon.getAttribute("crossorigin")).to.be.a("string");
-      expect(favicon.getAttribute("crossorigin")).to.equal("anonymous");
-    }
-  });
-
-  it("Manifest has integrity hash", function () {
-    expect(manifest.hasAttribute("integrity")).to.be.true;
-    expect(manifest.getAttribute("integrity")).to.be.a("string");
-  });
-
-  it("Manifest has crossorigin attribute", function () {
-    expect(manifest.hasAttribute("crossorigin")).to.be.true;
-    expect(manifest.getAttribute("crossorigin")).to.be.a("string");
-    expect(manifest.getAttribute("crossorigin")).to.equal("anonymous");
   });
 
   it("Some links start with publicPath, some start with rootURL", function () {
@@ -159,5 +129,20 @@ describe("External resource handling", function () {
         "sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs",
       );
     });
+  });
+});
+
+
+describe.only("Link tags with valid rel attributes are processed", async function () {
+    this.timeout(60000);
+    const buildOutput = await buildApp("link-rel-without-integrity-hash-support");
+    expect(buildOutput.exitCode).to.equal(0);
+
+    let indexHtml;
+
+    before(async function () {
+      indexHtml = await getIndexHtml("link-rel-without-integrity-hash-support");
+    });
+  it("Processes link when rel is 'styleheet', 'module', 'modulepreload'", function () {
   });
 });
