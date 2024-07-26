@@ -56,10 +56,13 @@ describe("Embroider build", function () {
 });
 
 describe("When rootURL and publicPath do not match", function () {
-  let indexHtml, manifest, favicons, stylesheets;
+  let indexHtml, favicons, stylesheets;
 
   before(async function () {
     indexHtml = await getIndexHtml("rooturl-and-publicpath-differ");
+    favicons = indexHtml.querySelectorAll(
+      'link[rel="icon"], link[rel="apple-touch-icon"]',
+    );
     stylesheets = indexHtml.querySelectorAll('link[rel="stylesheet"]');
   });
 
@@ -72,6 +75,26 @@ describe("When rootURL and publicPath do not match", function () {
     for (const favicon of favicons) {
       const href = favicon.getAttribute("href");
       expect(href.startsWith("/a-root-url/")).to.be.true;
+    }
+  });
+});
+
+describe("Link tags with valid rel attributes are processed", function () {
+    let indexHtml, links;
+    before(async function () {
+      indexHtml = await getIndexHtml("link-rel-without-integrity-hash-support");
+      links = indexHtml.querySelectorAll("link");
+    });
+    it(`Processes link when rel is 'module', 'modulepreload', or 'stylesheet'`, function () {
+    for (const link of links) {
+      const rel = link.getAttribute('rel');
+      const integrity = link.getAttribute("integrity");
+      if (rel === "module" || rel === "stylesheet" || rel === "modulepreload") {
+        expect(link.hasAttribute("integrity")).to.be.true;
+        expect(integrity).to.be.a("string");
+      } else {
+        expect(link.hasAttribute("integrity")).to.be.false;
+      }
     }
   });
 });
@@ -133,16 +156,5 @@ describe("External resource handling", function () {
 });
 
 
-describe.only("Link tags with valid rel attributes are processed", async function () {
-    this.timeout(60000);
-    const buildOutput = await buildApp("link-rel-without-integrity-hash-support");
-    expect(buildOutput.exitCode).to.equal(0);
 
-    let indexHtml;
 
-    before(async function () {
-      indexHtml = await getIndexHtml("link-rel-without-integrity-hash-support");
-    });
-  it("Processes link when rel is 'styleheet', 'module', 'modulepreload'", function () {
-  });
-});
