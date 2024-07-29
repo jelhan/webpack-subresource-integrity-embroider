@@ -23,20 +23,12 @@ class SubresourceIntegrityPlugin {
         );
         const scriptElements =
           indexHtml.window.document.querySelectorAll("script");
-        const linkElements = Array.from(
-          indexHtml.window.document.querySelectorAll("link")
-        ).filter(element => {
-            const relationship = element.getAttribute("rel");
-            // link integrity is only valid for rel="stylesheet", "module", "modulepreload"
-            if (
-              relationship === "stylesheet"
-              || relationship === "module"
-              || relationship === "modulepreload"
-            ) {
-              return true;
-            }
-            return false;
-        });
+
+        // link integrity is only valid for relationships including
+        // "stylesheet", "module", "modulepreload"
+        const linkElements = indexHtml.window.document.querySelectorAll(
+          "link:is([rel~=module], [rel~=modulepreload], [rel~=stylesheet])",
+        );
         const fileErrors = [];
         await Promise.all(
           [...scriptElements, ...linkElements].map(async (element) => {
