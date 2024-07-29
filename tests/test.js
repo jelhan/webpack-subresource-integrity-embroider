@@ -77,11 +77,11 @@ describe("Link tags with valid rel attributes are processed", function () {
     indexHtml = await getIndexHtml("link-rel-without-integrity-hash-support");
     links = indexHtml.querySelectorAll("link");
   });
-  it(`Processes link when rel is 'module', 'modulepreload', or 'stylesheet'`, function () {
+  it(`Processes link when rel includes 'module', 'modulepreload', or 'stylesheet'`, function () {
     for (const link of links) {
       const rel = link.getAttribute("rel");
       const integrity = link.getAttribute("integrity");
-      if (rel === "module" || rel === "stylesheet" || rel === "modulepreload") {
+      if (rel.includes("module") || rel.includes("stylesheet") || rel.includes("modulepreload")) {
         expect(link.hasAttribute("integrity")).to.be.true;
         expect(integrity).to.be.a("string");
       } else {
