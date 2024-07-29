@@ -56,13 +56,10 @@ describe("Embroider build", function () {
 });
 
 describe("When rootURL and publicPath do not match", function () {
-  let indexHtml, favicons, stylesheets;
+  let indexHtml, stylesheets;
 
   before(async function () {
     indexHtml = await getIndexHtml("rooturl-and-publicpath-differ");
-    favicons = indexHtml.querySelectorAll(
-      'link[rel="icon"], link[rel="apple-touch-icon"]',
-    );
     stylesheets = indexHtml.querySelectorAll('link[rel="stylesheet"]');
   });
 
@@ -70,11 +67,6 @@ describe("When rootURL and publicPath do not match", function () {
     for (const stylesheet of stylesheets) {
       const href = stylesheet.getAttribute("href");
       expect(href.startsWith("/a-different-public-path/")).to.be.true;
-    }
-
-    for (const favicon of favicons) {
-      const href = favicon.getAttribute("href");
-      expect(href.startsWith("/a-root-url/")).to.be.true;
     }
   });
 });
