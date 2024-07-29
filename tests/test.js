@@ -80,14 +80,14 @@ describe("When rootURL and publicPath do not match", function () {
 });
 
 describe("Link tags with valid rel attributes are processed", function () {
-    let indexHtml, links;
-    before(async function () {
-      indexHtml = await getIndexHtml("link-rel-without-integrity-hash-support");
-      links = indexHtml.querySelectorAll("link");
-    });
-    it(`Processes link when rel is 'module', 'modulepreload', or 'stylesheet'`, function () {
+  let indexHtml, links;
+  before(async function () {
+    indexHtml = await getIndexHtml("link-rel-without-integrity-hash-support");
+    links = indexHtml.querySelectorAll("link");
+  });
+  it(`Processes link when rel is 'module', 'modulepreload', or 'stylesheet'`, function () {
     for (const link of links) {
-      const rel = link.getAttribute('rel');
+      const rel = link.getAttribute("rel");
       const integrity = link.getAttribute("integrity");
       if (rel === "module" || rel === "stylesheet" || rel === "modulepreload") {
         expect(link.hasAttribute("integrity")).to.be.true;
@@ -154,7 +154,3 @@ describe("External resource handling", function () {
     });
   });
 });
-
-
-
-
