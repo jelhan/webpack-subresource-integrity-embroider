@@ -27,7 +27,7 @@ class SubresourceIntegrityPlugin {
         // link integrity is only valid for relationships including
         // "stylesheet", "module", "modulepreload"
         const linkElements = indexHtml.window.document.querySelectorAll(
-          "link:is([rel~=module], [rel~=modulepreload], [rel~=stylesheet])",
+          'link:is([rel~="module"], [rel~="modulepreload"], [rel~="stylesheet"])',
         );
         const fileErrors = [];
         await Promise.all(
