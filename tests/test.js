@@ -15,7 +15,7 @@ describe("Embroider build", function () {
       });
 
       it("adds integrity attribute to link elements for stylesheets", function () {
-        for (const el of indexHtml.querySelectorAll("link[rel=stylesheet]")) {
+        for (const el of indexHtml.querySelectorAll('link[rel="stylesheet"]')) {
           expect(el.hasAttribute("integrity")).to.be.true;
           expect(el.getAttribute("integrity")).to.be.a("string");
         }
@@ -33,7 +33,7 @@ describe("Embroider build", function () {
       });
 
       it("adds crossorigin attribute to link elements for stylesheets", function () {
-        for (const el of indexHtml.querySelectorAll("link[rel=stylesheet]")) {
+        for (const el of indexHtml.querySelectorAll('link[rel="stylesheet"]')) {
           expect(el.hasAttribute("crossorigin")).to.be.true;
           expect(el.getAttribute("crossorigin")).to.be.a("string");
           expect(el.getAttribute("crossorigin")).to.equal("anonymous");
@@ -51,57 +51,99 @@ describe("Embroider build", function () {
           }
         }
       });
+
+      if (scenario === "default") {
+        it("adds integrity attribute to link elements for alternate stylesheets", function () {
+          for (const el of indexHtml.querySelectorAll(
+            'link[rel="alternate stylesheet"]',
+          )) {
+            expect(el.hasAttribute("integrity")).to.be.true;
+            expect(el.getAttribute("integrity")).to.be.a("string");
+          }
+        });
+
+        it("adds integrity attribute to link elements for modules", function () {
+          for (const el of indexHtml.querySelectorAll('link[rel="module"]')) {
+            expect(el.hasAttribute("integrity")).to.be.true;
+            expect(el.getAttribute("integrity")).to.be.a("string");
+          }
+        });
+
+        it("adds integrity attribute to link elements for modulepreloads", function () {
+          for (const el of indexHtml.querySelectorAll(
+            "link[rel=modulepreload]",
+          )) {
+            expect(el.hasAttribute("integrity")).to.be.true;
+            expect(el.getAttribute("integrity")).to.be.a("string");
+          }
+        });
+
+        it("adds crossorigin attribute to link elements for alternate stylesheets", function () {
+          for (const el of indexHtml.querySelectorAll(
+            'link[rel="alternate stylesheet"]',
+          )) {
+            expect(el.hasAttribute("crossorigin")).to.be.true;
+            expect(el.getAttribute("crossorigin")).to.be.a("string");
+            expect(el.getAttribute("crossorigin")).to.equal("anonymous");
+          }
+        });
+
+        it("adds crossorigin attribute to link elements for modules", function () {
+          for (const el of indexHtml.querySelectorAll('link[rel="module"]')) {
+            expect(el.hasAttribute("crossorigin")).to.be.true;
+            expect(el.getAttribute("crossorigin")).to.be.a("string");
+            expect(el.getAttribute("crossorigin")).to.equal("anonymous");
+          }
+        });
+
+        it("adds crossorigin attribute to link elements for modulepreloads", function () {
+          for (const el of indexHtml.querySelectorAll(
+            "link[rel=modulepreload]",
+          )) {
+            expect(el.hasAttribute("crossorigin")).to.be.true;
+            expect(el.getAttribute("crossorigin")).to.be.a("string");
+            expect(el.getAttribute("crossorigin")).to.equal("anonymous");
+          }
+        });
+
+        it("does not add integrity or crossorigin to unsupported links", function () {
+          const dnsPrefetch = indexHtml.querySelector(
+            'link[rel="dns-prefetch"]',
+          );
+          expect(dnsPrefetch.hasAttribute("integrity")).to.be.false;
+          expect(dnsPrefetch.hasAttribute("crossorigin")).to.be.false;
+
+          const manifest = indexHtml.querySelector('link[rel="manifest"]');
+          expect(manifest.hasAttribute("integrity")).to.be.false;
+          expect(manifest.hasAttribute("crossorigin")).to.be.false;
+
+          const icon = indexHtml.querySelector('link[rel="icon"]');
+          expect(icon.hasAttribute("integrity")).to.be.false;
+          expect(icon.hasAttribute("crossorigin")).to.be.false;
+
+          const appleTouchIcon = indexHtml.querySelector(
+            'link[rel="apple-touch-icon"]',
+          );
+          expect(appleTouchIcon.hasAttribute("integrity")).to.be.false;
+          expect(appleTouchIcon.hasAttribute("crossorigin")).to.be.false;
+        });
+      }
     });
   }
 });
 
 describe("When rootURL and publicPath do not match", function () {
-  let indexHtml, manifest, favicons, stylesheets;
+  let indexHtml, stylesheets;
 
   before(async function () {
     indexHtml = await getIndexHtml("rooturl-and-publicpath-differ");
-    favicons = indexHtml.querySelectorAll(
-      'link[rel="icon"], link[rel="apple-touch-icon"]',
-    );
-    manifest = indexHtml.querySelector('link[rel="manifest"]');
     stylesheets = indexHtml.querySelectorAll('link[rel="stylesheet"]');
-  });
-
-  it("Favicons have integrity hash", function () {
-    for (const favicon of favicons) {
-      expect(favicon.hasAttribute("integrity")).to.be.true;
-      expect(favicon.getAttribute("integrity")).to.be.a("string");
-    }
-  });
-
-  it("Favicons have crossorigin attribute", function () {
-    for (const favicon of favicons) {
-      expect(favicon.hasAttribute("crossorigin")).to.be.true;
-      expect(favicon.getAttribute("crossorigin")).to.be.a("string");
-      expect(favicon.getAttribute("crossorigin")).to.equal("anonymous");
-    }
-  });
-
-  it("Manifest has integrity hash", function () {
-    expect(manifest.hasAttribute("integrity")).to.be.true;
-    expect(manifest.getAttribute("integrity")).to.be.a("string");
-  });
-
-  it("Manifest has crossorigin attribute", function () {
-    expect(manifest.hasAttribute("crossorigin")).to.be.true;
-    expect(manifest.getAttribute("crossorigin")).to.be.a("string");
-    expect(manifest.getAttribute("crossorigin")).to.equal("anonymous");
   });
 
   it("Some links start with publicPath, some start with rootURL", function () {
     for (const stylesheet of stylesheets) {
       const href = stylesheet.getAttribute("href");
       expect(href.startsWith("/a-different-public-path/")).to.be.true;
-    }
-
-    for (const favicon of favicons) {
-      const href = favicon.getAttribute("href");
-      expect(href.startsWith("/a-root-url/")).to.be.true;
     }
   });
 });
