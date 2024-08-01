@@ -2,6 +2,16 @@
 
 
 
+
+## v0.2.3 (2024-08-01)
+
+#### :bug: Bug Fix
+* [#16](https://github.com/jelhan/webpack-subresource-integrity-embroider/pull/16) Add integrity attribute only for those link elements supported by spec ([@meirish](https://github.com/meirish))
+
+#### Committers: 2
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Matthew Irish ([@meirish](https://github.com/meirish))
+
 ## v0.2.2 (2024-04-16)
 
 #### :bug: Bug Fix
