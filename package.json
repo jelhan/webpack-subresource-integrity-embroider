@@ -14,7 +14,7 @@
     "test": "pnpm --filter 'tests' test"
   },
   "devDependencies": {
-    "@release-it-plugins/lerna-changelog": "^5.0.0",
+    "@release-it-plugins/lerna-changelog": "^7.0.0",
     "prettier": "^3.2.4",
     "release-it": "^15.5.0"
   },
