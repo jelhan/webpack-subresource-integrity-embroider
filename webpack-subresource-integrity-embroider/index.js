@@ -19,7 +19,7 @@ class SubresourceIntegrityPlugin {
           indexHtml.window.unescape(environmentMeta.getAttribute("content")),
         );
         const rootURLOrPublicPathRegex = new RegExp(
-          `^(${rootURL || '/'}|${publicPath || '/'})`,
+          `^(${rootURL || "/"}|${publicPath || "/"})`,
         );
         const scriptElements =
           indexHtml.window.document.querySelectorAll("script");
