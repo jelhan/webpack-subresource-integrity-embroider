@@ -3,6 +3,15 @@
 
 
 
+
+## v0.2.4 (2025-03-01)
+
+#### :bug: Bug Fix
+* [#39](https://github.com/jelhan/webpack-subresource-integrity-embroider/pull/39) support empty rootURL and/or publicPath ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 1
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+
 ## v0.2.3 (2024-08-01)
 
 #### :bug: Bug Fix
