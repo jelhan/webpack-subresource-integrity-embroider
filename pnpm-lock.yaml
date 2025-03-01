@@ -13,7 +13,7 @@ importers:
         version: 7.0.0(release-it@17.6.0)
       prettier:
         specifier: ^3.2.4
-        version: 3.3.3
+        version: 3.5.2
       release-it:
         specifier: ^17.0.0
         version: 17.6.0
@@ -127,7 +127,7 @@ importers:
         version: 16.6.2(eslint@8.56.0)
       eslint-plugin-prettier:
         specifier: ^5.0.1
-        version: 5.1.3(@types/eslint@8.56.2)(eslint-config-prettier@9.1.0(eslint@8.56.0))(eslint@8.56.0)(prettier@3.3.3)
+        version: 5.1.3(@types/eslint@8.56.2)(eslint-config-prettier@9.1.0(eslint@8.56.0))(eslint@8.56.0)(prettier@3.5.2)
       eslint-plugin-qunit:
         specifier: ^8.0.1
         version: 8.0.1(eslint@8.56.0)
@@ -136,7 +136,7 @@ importers:
         version: 4.7.0
       prettier:
         specifier: ^3.1.1
-        version: 3.3.3
+        version: 3.5.2
       qunit:
         specifier: ^2.20.0
         version: 2.20.0
@@ -151,7 +151,7 @@ importers:
         version: 34.0.0(stylelint@15.11.0)
       stylelint-prettier:
         specifier: ^4.1.0
-        version: 4.1.0(prettier@3.3.3)(stylelint@15.11.0)
+        version: 4.1.0(prettier@3.5.2)(stylelint@15.11.0)
       tracked-built-ins:
         specifier: ^3.3.0
         version: 3.3.0
@@ -271,7 +271,7 @@ importers:
         version: 16.6.2(eslint@8.56.0)
       eslint-plugin-prettier:
         specifier: ^5.0.1
-        version: 5.1.3(@types/eslint@8.56.2)(eslint-config-prettier@9.1.0(eslint@8.56.0))(eslint@8.56.0)(prettier@3.3.3)
+        version: 5.1.3(@types/eslint@8.56.2)(eslint-config-prettier@9.1.0(eslint@8.56.0))(eslint@8.56.0)(prettier@3.5.2)
       eslint-plugin-qunit:
         specifier: ^8.0.1
         version: 8.0.1(eslint@8.56.0)
@@ -280,7 +280,7 @@ importers:
         version: 4.7.0
       prettier:
         specifier: ^3.1.1
-        version: 3.3.3
+        version: 3.5.2
       qunit:
         specifier: ^2.20.0
         version: 2.20.0
@@ -295,7 +295,7 @@ importers:
         version: 34.0.0(stylelint@15.11.0)
       stylelint-prettier:
         specifier: ^4.1.0
-        version: 4.1.0(prettier@3.3.3)(stylelint@15.11.0)
+        version: 4.1.0(prettier@3.5.2)(stylelint@15.11.0)
       tracked-built-ins:
         specifier: ^3.3.0
         version: 3.3.0
@@ -415,7 +415,7 @@ importers:
         version: 16.6.2(eslint@8.56.0)
       eslint-plugin-prettier:
         specifier: ^5.0.1
-        version: 5.1.3(@types/eslint@8.56.2)(eslint-config-prettier@9.1.0(eslint@8.56.0))(eslint@8.56.0)(prettier@3.3.3)
+        version: 5.1.3(@types/eslint@8.56.2)(eslint-config-prettier@9.1.0(eslint@8.56.0))(eslint@8.56.0)(prettier@3.5.2)
       eslint-plugin-qunit:
         specifier: ^8.0.1
         version: 8.0.1(eslint@8.56.0)
@@ -424,7 +424,7 @@ importers:
         version: 4.7.0
       prettier:
         specifier: ^3.1.1
-        version: 3.3.3
+        version: 3.5.2
       qunit:
         specifier: ^2.20.0
         version: 2.20.0
@@ -439,7 +439,7 @@ importers:
         version: 34.0.0(stylelint@15.11.0)
       stylelint-prettier:
         specifier: ^4.1.0
-        version: 4.1.0(prettier@3.3.3)(stylelint@15.11.0)
+        version: 4.1.0(prettier@3.5.2)(stylelint@15.11.0)
       tracked-built-ins:
         specifier: ^3.3.0
         version: 3.3.0
@@ -559,7 +559,7 @@ importers:
         version: 16.6.2(eslint@8.56.0)
       eslint-plugin-prettier:
         specifier: ^5.0.1
-        version: 5.1.3(@types/eslint@8.56.2)(eslint-config-prettier@9.1.0(eslint@8.56.0))(eslint@8.56.0)(prettier@3.3.3)
+        version: 5.1.3(@types/eslint@8.56.2)(eslint-config-prettier@9.1.0(eslint@8.56.0))(eslint@8.56.0)(prettier@3.5.2)
       eslint-plugin-qunit:
         specifier: ^8.0.1
         version: 8.0.1(eslint@8.56.0)
@@ -568,7 +568,7 @@ importers:
         version: 4.7.0
       prettier:
         specifier: ^3.1.1
-        version: 3.3.3
+        version: 3.5.2
       qunit:
         specifier: ^2.20.0
         version: 2.20.0
@@ -583,7 +583,7 @@ importers:
         version: 34.0.0(stylelint@15.11.0)
       stylelint-prettier:
         specifier: ^4.1.0
-        version: 4.1.0(prettier@3.3.3)(stylelint@15.11.0)
+        version: 4.1.0(prettier@3.5.2)(stylelint@15.11.0)
       tracked-built-ins:
         specifier: ^3.3.0
         version: 3.3.0
@@ -703,7 +703,7 @@ importers:
         version: 16.6.2(eslint@8.56.0)
       eslint-plugin-prettier:
         specifier: ^5.0.1
-        version: 5.1.3(@types/eslint@8.56.2)(eslint-config-prettier@9.1.0(eslint@8.56.0))(eslint@8.56.0)(prettier@3.3.3)
+        version: 5.1.3(@types/eslint@8.56.2)(eslint-config-prettier@9.1.0(eslint@8.56.0))(eslint@8.56.0)(prettier@3.5.2)
       eslint-plugin-qunit:
         specifier: ^8.0.1
         version: 8.0.1(eslint@8.56.0)
@@ -712,7 +712,7 @@ importers:
         version: 4.7.0
       prettier:
         specifier: ^3.1.1
-        version: 3.3.3
+        version: 3.5.2
       qunit:
         specifier: ^2.20.0
         version: 2.20.0
@@ -727,7 +727,7 @@ importers:
         version: 34.0.0(stylelint@15.11.0)
       stylelint-prettier:
         specifier: ^4.1.0
-        version: 4.1.0(prettier@3.3.3)(stylelint@15.11.0)
+        version: 4.1.0(prettier@3.5.2)(stylelint@15.11.0)
       tracked-built-ins:
         specifier: ^3.3.0
         version: 3.3.0
@@ -847,7 +847,7 @@ importers:
         version: 16.6.2(eslint@8.56.0)
       eslint-plugin-prettier:
         specifier: ^5.0.1
-        version: 5.1.3(@types/eslint@8.56.2)(eslint-config-prettier@9.1.0(eslint@8.56.0))(eslint@8.56.0)(prettier@3.3.3)
+        version: 5.1.3(@types/eslint@8.56.2)(eslint-config-prettier@9.1.0(eslint@8.56.0))(eslint@8.56.0)(prettier@3.5.2)
       eslint-plugin-qunit:
         specifier: ^8.0.1
         version: 8.0.1(eslint@8.56.0)
@@ -856,7 +856,7 @@ importers:
         version: 4.7.0
       prettier:
         specifier: ^3.1.1
-        version: 3.3.3
+        version: 3.5.2
       qunit:
         specifier: ^2.20.0
         version: 2.20.0
@@ -871,7 +871,7 @@ importers:
         version: 34.0.0(stylelint@15.11.0)
       stylelint-prettier:
         specifier: ^4.1.0
-        version: 4.1.0(prettier@3.3.3)(stylelint@15.11.0)
+        version: 4.1.0(prettier@3.5.2)(stylelint@15.11.0)
       tracked-built-ins:
         specifier: ^3.3.0
         version: 3.3.0
@@ -905,7 +905,7 @@ importers:
     devDependencies:
       prettier:
         specifier: ^3.2.4
-        version: 3.3.3
+        version: 3.5.2
 
 packages:
 
@@ -5669,9 +5669,11 @@ packages:
 
   lodash.omit@4.5.0:
     resolution: {integrity: sha512-XeqSp49hNGmlkj2EJlfrQFIzQ6lXdNro9sddtQzcJY8QaoC2GO0DT7xaIokHeyM+mIT0mPMlPvkYzg2xCuHdZg==}
+    deprecated: This package is deprecated. Use destructuring assignment syntax instead.
 
   lodash.template@4.5.0:
     resolution: {integrity: sha512-84vYFxIkmidUiFxidA/KjjH9pAycqW+h980j7Fuz5qxRtO9pgB7MDFTdys1N7A5mcucRiDyEq4fusljItR1T/A==}
+    deprecated: This package is deprecated. Use https://socket.dev/npm/package/eta instead.
 
   lodash.templatesettings@4.2.0:
     resolution: {integrity: sha512-stgLz+i3Aa9mZgnjr/O+v9ruKZsPsndy7qPZOchbqk2cnTU1ZaldKK+v7m54WoKIyxiuMZTKT2H81F8BeAc3ZQ==}
@@ -6560,8 +6562,8 @@ packages:
     engines: {node: '>=10.13.0'}
     hasBin: true
 
-  prettier@3.3.3:
-    resolution: {integrity: sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==}
+  prettier@3.5.2:
+    resolution: {integrity: sha512-lc6npv5PH7hVqozBR7lkBNOGXV9vMwROAPlumdBkX0wTbbzPu/U1hk5yL8p2pt4Xoc+2mkT8t/sow2YrV/M5qg==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -9063,7 +9065,7 @@ snapshots:
       - '@glint/template'
       - supports-color
 
-  '@ember-data/legacy-compat@5.3.0(hojdwyrfoinsdiwyyj6s35b2r4)':
+  '@ember-data/legacy-compat@5.3.0(0e551bc3eb7d29c0411591f79e87e5c6)':
     dependencies:
       '@ember-data/private-build-infra': 5.3.0
       '@ember-data/request': 5.3.0(@babel/core@7.23.9)
@@ -9077,9 +9079,9 @@ snapshots:
       - '@glint/template'
       - supports-color
 
-  '@ember-data/model@5.3.0(odeeqpdyucmt45f2ftug5hbddq)':
+  '@ember-data/model@5.3.0(8ada313db79b6c6ad755da859a1a2549)':
     dependencies:
-      '@ember-data/legacy-compat': 5.3.0(hojdwyrfoinsdiwyyj6s35b2r4)
+      '@ember-data/legacy-compat': 5.3.0(0e551bc3eb7d29c0411591f79e87e5c6)
       '@ember-data/private-build-infra': 5.3.0
       '@ember-data/store': 5.3.0(@babel/core@7.23.9)(@ember-data/tracking@5.3.0(@babel/core@7.23.9))(@ember/string@3.1.1)(@glimmer/tracking@1.1.2)(ember-source@5.5.0(@babel/core@7.23.9)(@glimmer/component@1.1.2(@babel/core@7.23.9))(rsvp@4.8.5)(webpack@5.90.0))
       '@ember-data/tracking': 5.3.0(@babel/core@7.23.9)
@@ -12369,8 +12371,8 @@ snapshots:
       '@ember-data/debug': 5.3.0(@ember-data/store@5.3.0(@babel/core@7.23.9)(@ember-data/tracking@5.3.0(@babel/core@7.23.9))(@ember/string@3.1.1)(@glimmer/tracking@1.1.2)(ember-source@5.5.0(@babel/core@7.23.9)(@glimmer/component@1.1.2(@babel/core@7.23.9))(rsvp@4.8.5)(webpack@5.90.0)))(@ember/string@3.1.1)
       '@ember-data/graph': 5.3.0(@babel/core@7.23.9)(@ember-data/store@5.3.0(@babel/core@7.23.9)(@ember-data/tracking@5.3.0(@babel/core@7.23.9))(@ember/string@3.1.1)(@glimmer/tracking@1.1.2)(ember-source@5.5.0(@babel/core@7.23.9)(@glimmer/component@1.1.2(@babel/core@7.23.9))(rsvp@4.8.5)(webpack@5.90.0)))
       '@ember-data/json-api': 5.3.0(@babel/core@7.23.9)(@ember-data/graph@5.3.0(@babel/core@7.23.9)(@ember-data/store@5.3.0(@babel/core@7.23.9)(@ember-data/tracking@5.3.0(@babel/core@7.23.9))(@ember/string@3.1.1)(@glimmer/tracking@1.1.2)(ember-source@5.5.0(@babel/core@7.23.9)(@glimmer/component@1.1.2(@babel/core@7.23.9))(rsvp@4.8.5)(webpack@5.90.0))))(@ember-data/request-utils@5.3.0(@babel/core@7.23.9))(@ember-data/store@5.3.0(@babel/core@7.23.9)(@ember-data/tracking@5.3.0(@babel/core@7.23.9))(@ember/string@3.1.1)(@glimmer/tracking@1.1.2)(ember-source@5.5.0(@babel/core@7.23.9)(@glimmer/component@1.1.2(@babel/core@7.23.9))(rsvp@4.8.5)(webpack@5.90.0)))(ember-inflector@4.0.2)
-      '@ember-data/legacy-compat': 5.3.0(hojdwyrfoinsdiwyyj6s35b2r4)
-      '@ember-data/model': 5.3.0(odeeqpdyucmt45f2ftug5hbddq)
+      '@ember-data/legacy-compat': 5.3.0(0e551bc3eb7d29c0411591f79e87e5c6)
+      '@ember-data/model': 5.3.0(8ada313db79b6c6ad755da859a1a2549)
       '@ember-data/private-build-infra': 5.3.0
       '@ember-data/request': 5.3.0(@babel/core@7.23.9)
       '@ember-data/request-utils': 5.3.0(@babel/core@7.23.9)
@@ -12800,10 +12802,10 @@ snapshots:
       resolve: 1.22.8
       semver: 7.5.4
 
-  eslint-plugin-prettier@5.1.3(@types/eslint@8.56.2)(eslint-config-prettier@9.1.0(eslint@8.56.0))(eslint@8.56.0)(prettier@3.3.3):
+  eslint-plugin-prettier@5.1.3(@types/eslint@8.56.2)(eslint-config-prettier@9.1.0(eslint@8.56.0))(eslint@8.56.0)(prettier@3.5.2):
     dependencies:
       eslint: 8.56.0
-      prettier: 3.3.3
+      prettier: 3.5.2
       prettier-linter-helpers: 1.0.0
       synckit: 0.8.8
     optionalDependencies:
@@ -15531,7 +15533,7 @@ snapshots:
 
   prettier@2.8.8: {}
 
-  prettier@3.3.3: {}
+  prettier@3.5.2: {}
 
   pretty-ms@3.2.0:
     dependencies:
@@ -16496,9 +16498,9 @@ snapshots:
       stylelint: 15.11.0
       stylelint-config-recommended: 13.0.0(stylelint@15.11.0)
 
-  stylelint-prettier@4.1.0(prettier@3.3.3)(stylelint@15.11.0):
+  stylelint-prettier@4.1.0(prettier@3.5.2)(stylelint@15.11.0):
     dependencies:
-      prettier: 3.3.3
+      prettier: 3.5.2
       prettier-linter-helpers: 1.0.0
       stylelint: 15.11.0
 
